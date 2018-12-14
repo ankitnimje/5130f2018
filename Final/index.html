@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>WEB CRAWLER</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+.autocomplete {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.w3-lobster {
+    font-family: "Lobster", serif;
+}
+
+.bgimg-1 {
+    background-image: url("images/b0.jpg");
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+
+.bgimg-2 {
+    background-image: url("images/b1.jpg");
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+
+.bgimg-3 {
+    background-image: url("images/b2.jpg");
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+
+.bgimg-4 {
+    background-image: url("images/b3.jpg");
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+.bgimg-5 {
+    background-image: url("images/b4.jpg");
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+.circle-text {
+display: table-cell;
+height: 150px; /*change this and the width
+for the size of your initial circle*/
+width: 150px;
+text-align: center;
+vertical-align: middle;
+border-radius: 50%;
+/*make it pretty*/
+color: #0c0c0c;
+font: 18px "josefin sans", arial; /*change this
+for font-size and font-family*/
+}
+</style>
+<body class="w3-pale-green w3-content" style="max-width:1600px">
+
+
+<div class="navbar navbar-fixed-top navbar-default" role="navigation" style="background-color: #000000; height: 70px;">
+  <div class="container-fluid">
+        <div class="navbar-header" >
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+            </button>
+            <a class="navbar-brand w3-text-white w3-lobster w3-xxlarge" href="#" style="padding-left: 530px; word-spacing: 10px; letter-spacing: 4px;">WEB CRAWLER <i class="fa fa-home" style="font-size:40px; padding-left: 430px; "></i></a>
+          </div>
+        </div>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-pale-blue w3-animate-left w3-text-black w3-collapse w3-top w3-center " style="z-index:3;width:250px;font-weight:bold" id="mySidebar"><br>
+  <h4 class="w3-padding-64 w3-center"><img class="manImg" src="w.png"></img></h4>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
+  <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">HOME</a> 
+  <a href="#webcrawl" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">INTRODUCTION</a>
+  <a href="#works" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">HOW IT WORKS?</a> 
+  <a href="#dfs" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">DFS-BFS-CRAWLER</a> 
+
+  <a href="#page-rank" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">PAGE-RANK</a>
+  <a href="#more" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-black">QUESTIONS?</a>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-white w3-xlarge w3-padding-16">
+  <span class="w3-left w3-padding"><img class="manImg" src="w.png"></img></span>
+  <a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left: 250px">
+
+  <!-- Push down content on small screens --> 
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  
+  
+<div class="w3-container bgimg-1" style="padding-top: 100px;">
+  
+ 
+  <form id='test' autocomplete="off" action="#" method="get">
+  <div class="autocomplete">
+    <div align="center">
+    <label for="usr" style="font-size: 30px;"><i>WIKI SEARCH</i></label></div>
+     <div class="col-xs-10" style="padding-left: 180px;">
+    <input id="myInput" type="text" class="form-control input-lg" name="search" placeholder="Suggestions"></div>
+    <button id="myBtn" onclick="javascript:autocomplete" type="submit" style="display: none">Button</button>
+
+  </div>
+ 
+  
+</form>
+<div class="row">
+  <div class="column" >
+    <pre id="output_link" style="width:100%; height: 380px;">
+      <div style="padding-top: 20px">
+       <span id="link1" style="font-size: 15px;""></span>
+       <span id="link2" style="font-size: 15px;"></span>
+       <span id="link3" style="font-size: 15px;"></span>
+       <span id="link4" style="font-size: 15px;"></span>
+       <span id="link5" style="font-size: 15px;"></span>
+       <span id="link6" style="font-size: 15px;"></span>
+       <span id="link7" style="font-size: 15px;"></span>
+       <span id="link8" style="font-size: 15px;"></span>
+      
+       </div>
+      
+
+    </pre>
+  </div>
+  <div class="column">
+    <pre id="output_image" style="width:100%; height: 380px;">
+      
+    </pre>
+  </div></div>
+<br><br>
+     
+    
+</div>
+
+  
+
+
+  <!-- Modal for full size images on click-->
+  
+<div class="" id="webcrawl">
+    <div class="w3-content w3-container bgimg-2" style="max-width:1100px; padding-left: 120px">
+
+    </br>
+      <br>
+      <br>
+      <br>
+      <h3 class="w3-center"><b>WHAT IS A WEB CRAWLER ?</b></h3>
+      <br>
+      <div class="row">
+         <div class="column" style="padding-top: 30px; font-size:18px"  >
+           <p>Web crawler is a program that acts as an automated script which browses through the internet in a systematic way. The web crawler looks at the keywords in the pages, the kind of content each page has and the links, before returning the information to the search engine. This process is known as Web crawling. <br><br>
+           Web crawler also called as:
+          <ul>
+         <li>Web Spider</li>
+         <li>Web Robots</li>
+         <li>Spider Bots</li>
+         <li>Automative Indexer</li>
+         <br><br><br>
+         
+         </ul></p>
+         </div>
+         <div class="column" style="padding-left: 30px;">
+          <div class="row">
+            <div class="column"><div class="circle-text" style="background-color: #fcff4c">
+                Google Bot</div>
+              </div>
+             <div class="column"><div class="circle-text" style="background-color: #9eff59">
+                Bing Bot</div>
+              </div> </div>   
+            <div class="row">
+            <div class="column"><div class="circle-text" style="background-color: #6ffcdb">
+                SlurpBot</div>
+              </div>
+             <div class="column"><div class="circle-text" style="background-color: #f998f1">
+                Alexa Crawler</div>
+              </div> </div>
+          
+      </div>
+      
+     </br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      </br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      </br>
+        
+ </div>
+  </div>
+ 
+<!-- HOW WEB CRAWLER WORKS SECTION-->
+<div class="w3-container bgimg-3" style="max-width:1100px; padding-left: 120px" id="works">
+  <br><br><br><br>
+   <h3 class="w3-center" ><b>How does Web Crawler Works ?</b></h3><br>
+    <div class="">
+      <div class="row">
+        <div class="column" style=" padding-top: 20px;">
+          <img src="images/WebCrawlerWork.jpg" alt="Web Crawler" height="380" width="430">
+        </div>
+
+        <div class="column" style="padding-top: 30px; font-size: 18px ">
+          <p>A Web-Crawler is an automated script which means all of its actions are predefined.
+            <ol>
+ 
+            <li>A Crawler first begins with an initial list of URLs to visit, these URLs are called seeds. </li><br>
+            <li>Then it identifies all the hyperlinks to other pages that are listed on the initial seed page and adds them to frontier.</li><br>
+<li>The web crawler then saves these web pages in form of HTML documents which are later worked upon by the search engine and an index is created.</li></ol></p>
+
+        </div>
+      </div>
+
+      
+      <hr class="w3-opacity">
+      
+
+        
+         
+    </div>
+  </div>
+
+
+
+
+  <!-- DFS section -->
+  <div class="w3-container bgimg-4" style="max-width:1100px; padding-left: 110px" id="dfs">
+    <br><br><br><br><br>
+   <h3 class="w3-center"><b>DFS AND BFS CRAWLER</b></h3><br>
+    <div class="" style="max-width:800px">
+      <div class="row">
+        <div class="column" style="font-size: 18px ">
+            <p>  <ul><li>Implemented with STACK (LIFO)</li>
+            <li>Wander away (“lost in cyberspace”)</li>
+            <li>DFS is considered as a good algorithm if the graph is dense, but not sure when to stop.</li>
+              <li>Use MAX LINK DEPTH,Record urls that you have crawled and omit a new request, if the url has been crawled.</li></ul></p>
+          <img src="images/dfs.jpg" alt="Web Crawler" style="padding-left: 80px">
+        </div>
+          <div class="column" style="font-size: 18px ">
+            <p><ul>
+              <li>Implemented with QUEUE (FIFO)</li>
+             <li>Finds pages along shortest paths</li>
+             <li>If we start with “good” pages, this keeps
+                                    us close; maybe other good stuff…</li>
+              <li>BFS is good for graphs but it's too slow on dense graph and consumes hell lot of memory.</li>                    </ul></p>
+            <img src="images/bfs.jpg" alt="Web Crawler" style="padding-left: 80px">
+          </div>
+          </div>
+
+
+      <hr class="w3-opacity">
+      
+
+        
+         
+    </div>
+  </div>
+
+  <!-- page-rank section -->
+  <div class="w3-padding-32 w3-padding-large bgimg-5" id="page-rank">
+    
+       <br><br><br>
+   <h3 class="w3-center"><b>PAGE RANK ALGORITHM</b></h3><br>
+   <div class="" style="max-width:100%; font-size: 18px">
+   <p>
+     The PageRank algorithm outputs a probability distribution used to represent the likelihood that a person randomly clicking on links will arrive at any particular page. PageRank can be calculated for collections of documents of any size. It is assumed in several research papers that the distribution is evenly divided among all documents in the collection at the beginning of the computational process. The PageRank computations require several passes, called “iterations”, through the collection to adjust approximate PageRank values to more closely reflect the theoretical true value.
+
+   </p>
+<br>
+        <h3 class="w3-center"><b>HOW PAGE RANK IS CALCULATED</b></h3><br>  
+      <img src="images/p1.jpg" alt="PageRank" style="padding-left: 200px">
+      <img src="images/p2.jpg" alt="PageRank" >
+      <br>
+      </br>
+      <br>
+      
+      <br>   
+   </div>
+  </div>
+
+<!-- more additional sections--> 
+ <div class="w3-container w3-light-grey w3-padding-3arge" id="more">
+    <div class="w3-content" style="max-width:600px">
+      <br><br><br>
+      <br>
+      <h3 class="w3-center"><b>QUESTIONS?</b></h3>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      
+      <br>   
+ </div>
+  </div>
+
+<!-- WEB CRAWLER SECTION-->
+
+<!-- End page content -->
+</div>
+
+<script>
+$(document).ready(function(){
+
+
+
+
+    
+    $.ajax({
+            url: "http://127.0.0.1:5000/run-wiki-image",
+            data: "", //ur data to be sent to server
+            contentType: "application/json; charset=utf-8", 
+            type: "GET",
+            success: function (data) {
+
+            var t=JSON.parse(data);
+            //for (var i =0;i<t.length;i++){
+             // alert(t[i]);
+             var container = document.getElementById("output_image");
+
+for (var i=0, len =t.length; i < len; ++i) {
+     var img = new Image();
+     img.src = t[i];
+     container.appendChild(img);
+}
+            
+             
+           
+             
+            },
+            error: function (x, y, z) {
+              // alert(x.responseText +"  " +x.status);
+            }
+        });
+
+    $.ajax({
+            url: "http://127.0.0.1:5000/run-crawler",
+            data: "", //ur data to be sent to server
+            contentType: "application/json; charset=utf-8", 
+            type: "GET",
+            success: function (data) {
+
+              var t=JSON.parse(data);
+              var i=1;
+              for(key in t){
+               var link = document.createElement('a');
+               link.textContent = t[key];
+               link.href = t[key];
+               document.getElementById('link'+i).appendChild(link);
+                i++;
+              }
+             
+           
+             
+            },
+            error: function (x, y, z) {
+              // alert(x.responseText +"  " +x.status);
+            }
+        });
+ 
+  
+
+  });
+
+  var input = document.getElementById("myInput");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("myBtn").click();
+    }
+});
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+var values = ["Australia","Animal","Automation","Arthropod","Africa",
+"Austria","Adolf Hitler","amazon","Apple","airbnb",
+"Autism","Android","Adidas","Angular","Audi","Brazil","Belgium","Barak Obama","Basket Ball","BBC","Nohemian Rhapsody",
+"Canada","Copyright","China","Californiya","City","Cobra",
+"Donald Trump","Darth Vadar","Daylight Saving Time","Django","Doberman","Djikstra",
+"England","English Language","Eminem","European Union","Elizabeth II","Einstein",
+"Fair Use","France","Facebook","French","Flikr","Finland",
+"Google","Germany","Greece","George Washington","Gautama Buddha","Gopro",
+"Harry Potter","Hongkong","Halloween","Hinduism","House","Hillary Clinton",
+"India","IMDb","Iran","Italy","ISRO","Iceland",
+"Japan","Justin Bieber","Jesus","John F. Kennedy","Jennifer Lopez","Jacobean",
+"Kazakhstan","Kanye West","katy Perry","Krishna","Kane","KBC",
+"London","Los Angeles","Lady Gaga","Led Zeppelin","LED","Lambda",
+"Mexico","Mahatma Gandhi","Maxim","Michael Jackson","Morocco","Malaysia",
+"New York","NYC","Nigeria","New England","Network","Nebraska",
+"Ohio","Oprah Winfrey","Oregon","Olympic Games","Outlook","Ottoman",
+"Poland","Pakistan","Paris","Proxy Server","Public Domain","Philadelphia",
+"Queen","Queen Victoria","Queen Elizabeth","Qatar","Quebec","Quantum",
+"Russia","Romania","Richard Nixon","Rail Network","Republican Party","Regular Expression",
+"Spain","Sweden","Scotland","Singapore","Soviet Union","Sri Lanka",
+"Time Zone","Turky","Thailand","Tweeter","Taxonomy","Town",
+"United States","United Kingdom","Umbro","United Nations","Ultipro","Uganda",
+"Video Game","Virginia","Virgin Airlines","Vietnam","Virtualization","Volleyball",
+"Wikipedia","World War","Washington","Wisconsin","Washington DC","William Shakespeare",
+"Xbox 360","Xbox One","X ray","XML","X men","Xi Jinping",
+"Yahoo","Youtube","Yale University","Year","Young Sheldon","Yemen",
+"Zebra","ZIP code","Zootopia","Zurich","Zoophilia","Zeus"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the values array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), values);
+
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+(function() {
+
+  function toJSONString( form ) {
+    var obj = {};
+    var elements = form.querySelectorAll( "input, select, textarea" );
+    for( var i = 0; i < elements.length; ++i ) {
+      var element = elements[i];
+      var name = element.name;
+      var value = element.value;
+
+      if( name ) {
+        obj[ name ] = value;
+      }
+    }
+
+    return JSON.stringify( obj );
+  }
+
+  document.addEventListener( "DOMContentLoaded", function() {
+    var form = document.getElementById( "test" );
+    var output = document.getElementById( "output" );
+    form.addEventListener( "submit", function( e ) {
+      e.preventDefault();
+      var json = toJSONString( this );
+      output.innerHTML = json;
+
+    }, false);
+
+  });
+
+})();
+
+
+
+
+</script>
+
+
+</body>
+</html>
